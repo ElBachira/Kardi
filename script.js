@@ -1,18 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- PARCHE PARA AUTOPLAY ---
     const audio = document.getElementById('song-player'); 
-
-    // --- PRE-LOADER ---
     const preloader = document.getElementById('preloader');
     
-    // <-- CAMBIO 1: ELIMINA ESTAS 3 LÍNEAS -->
-    // window.addEventListener('load', () => {
-    //     preloader.classList.add('loaded');
-    // });
-    // <-- FIN DEL CAMBIO 1 -->
-
-    // --- EFECTOS DE SONIDO ---
     const clickSound = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
     const swooshSound = new Audio('https://www.fesliyanstudios.com/play-mp3/570');
     
@@ -28,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- ANIMACIÓN DE TEXTO "MÁQUINA DE ESCRIBIR" ---
     document.querySelectorAll('.typewriter').forEach((element, index) => {
         const text = element.innerHTML;
         element.innerHTML = '';
@@ -46,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500 + index * 100); 
     });
 
-    // --- EFECTO PARALLAX ---
     document.addEventListener('mousemove', (e) => {
         const { clientX, clientY } = e;
         const { innerWidth, innerHeight } = window;
@@ -57,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- LÓGICA DE PESTAÑAS ---
     const tabButtons = document.querySelectorAll('.tab-button');
     const closeButtons = document.querySelectorAll('.close-btn');
     tabButtons.forEach(button => {
@@ -73,28 +60,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     function animateStats() {
-        // 1. Buscamos las barras DENTRO del panel activo
         const bars = document.querySelectorAll('.overlay-pane.active .fill');
-        
         bars.forEach(bar => {
-            // 2. TRUCO PRO: Quitamos la transición momentáneamente para que el reset a 0 sea instantáneo
             bar.style.transition = 'none';
             bar.style.width = '0%';
-            
-            // 3. Forzamos al navegador a "pintar" el 0% (Reflow)
             void bar.offsetWidth; 
-            
-            // 4. Restauramos la transición (asegúrate que en tu CSS .fill tenga transition: width 1s...)
             bar.style.transition = 'width 1s ease-in-out';
 
-            // 5. Obtenemos el porcentaje y LIMPIAMOS el dato por si pusiste un % en el HTML por error
             let rawVal = bar.getAttribute('data-p');
-            
             if(rawVal) {
-                // Esto quita el símbolo '%' y espacios si se te escaparon en el HTML
                 const percentage = rawVal.replace('%', '').trim();
-                
-                // 6. Aplicamos el ancho limpio
                 setTimeout(() => {
                     bar.style.width = percentage + '%';
                 }, 50);
@@ -102,11 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-
-    // --- LÓGICA DEL REPRODUCTOR DE MÚSICA Y LETRAS (COMPLETAMENTE NUEVO) ---
-
     // =================================================================
-    // === ¡EDITA ESTA SECCIÓN CON TUS CANCIONES Y LETRAS! ===
+    // === CONFIGURACIÓN DE CANCIONES ===
     // =================================================================
     const songs = [
         {
@@ -114,104 +86,29 @@ document.addEventListener('DOMContentLoaded', function() {
             artist: "The Stranglers",
             src: "song.mp3",
             lyrics: [
-                // 'time' es el segundo exacto en que quieres que aparezca la línea
                   { time: 20, line: "Oro marrón, textura de sol" },
-{ time: 25, line: "Me tumba al suelo, mi mente escapó" },
-{ time: 28, line: "Toda la noche" },
-{ time: 30, line: "Sin pelear" },
-{ time: 32, line: "Nada va mal... con mi oro marrón" },
-{ time: 40, line: "Cada vez, igual que ayer" },
-{ time: 44, line: "En su barco, atado al mástil voy" },
-{ time: 47, line: "A tierras lejanas" },
-{ time: 50, line: "Me toma las manos" },
-{ time: 51, line: "Nada va mal... con mi oro marrón" },
-{ time: 76, line: "Oro marrón, fina tentación" },
-{ time: 80, line: "Por los siglos viaja hacia el oeste" },
-{ time: 84, line: "Viene de lejos" },
-{ time: 85, line: "Un día se queda" },
-{ time: 87, line: "Nada va mal... con mi oro marrón" },
-{ time: 171, line: "Nunca hay dolor... (nunca hay dolor)" },
-{ time: 174, line: "(Nunca hay dolor) con mi oro marrón (con mi oro marrón)" },
-{ time: 178, line: "(Con mi oro marrón) nunca hay dolor (nunca hay dolor)" },
-{ time: 182, line: "(Nunca hay dolor) con mi oro marrón (con mi oro marrón)" },
-{ time: 185, line: "(Con mi oro marrón) nunca hay dolor (nunca hay dolor)" },
-{ time: 190, line: "(Nunca hay dolor) con mi oro marrón (con mi oro marrón)" },
-{ time: 194, line: "(Con mi oro marrón) nunca hay dolor (nunca hay dolor)" },
-{ time: 198, line: "(Nunca hay dolor) con mi oro marrón..." }
-                // ... Sigue añadiendo líneas ...
+                  { time: 25, line: "Me tumba al suelo, mi mente escapó" },
+                  { time: 28, line: "Toda la noche" },
+                  { time: 30, line: "Sin pelear" },
+                  { time: 32, line: "Nada va mal... con mi oro marrón" },
+                  // ... Puedes añadir más líneas aquí ...
             ]
         },
         {
-            title: "Army Dreamers", // <-- CAMBIA ESTO
-            artist: "Kate Bush", // <-- CAMBIA ESTO
+            title: "Army Dreamers", 
+            artist: "Kate Bush", 
             src: "song2.mp3",
             lyrics: [
-                // 'time' es el segundo exacto en que quieres que aparezca la línea
                   { "time": 7, "line": "(Jóvenes soñadores)" },
-  { "time": 10, "line": "(El héroe de mami)" },
-  { "time": 15, "line": "(B-F-P-O)" },
-  { "time": 21, "line": "(El héroe de mami)" },
-  { "time": 22, "line": "Mi soldadito," },
-  { "time": 25, "line": "vuelve a casa desde B-F-P-O." },
-  { "time": 28, "line": "Tenemos un ramo de flores moradas," },
-  { "time": 29, "line": "para adornar al héroe de mami." },
-  { "time": 32, "line": "Luto en el aeródromo," },
-  { "time": 35, "line": "aunque el día es cálido, él yace frío." },
-  { "time": 38, "line": "Cuatro hombres de uniforme," },
-  { "time": 39, "line": "traen a casa a mi pequeño soldado." },
-  { "time": 42, "line": "(¿Qué podía hacer? Debió ser una estrella de rock)" },
-  { "time": 45, "line": "Pero no tenía dinero para una guitarra." },
-  { "time": 48, "line": "(¿Qué podía hacer? Debió ser un político)" },
-  { "time": 50, "line": "Pero nunca tuvo una buena educación." },
-  { "time": 52, "line": "(¿Qué podía hacer? Debió haber sido padre)" },
-  { "time": 55, "line": "Pero ni siquiera llegó a los veinte años." },
-  { "time": 58, "line": "Qué desperdicio," },
-  { "time": 60, "line": "jóvenes soñadores del ejército." },
-  { "time": 62, "line": "Ooh, qué desperdicio de" },
-  { "time": 64, "line": "jóvenes soñadores." },
-  { "time": 65, "line": "(Soñadores)" },
-  { "time": 68, "line": "Lágrimas sobre una caja de metal." },
-  { "time": 70, "line": "Oh, Dios mío, él no podía saberlo." },
-  { "time": 73, "line": "Como un pollo frente a un zorro," },
-  { "time": 76, "line": "no ganaría la guerra solo con su ego." },
-  { "time": 78, "line": "Denle al niño las mejores insignias," },
-  { "time": 81, "line": "y denle todas sus barras y medallas." },
-  { "time": 83, "line": "Ahora él yace en su agujero," },
-  { "time": 85, "line": "le daría igual tener botones y lazos." },
-  { "time": 88, "line": "(¿Qué podía hacer? Debió ser una estrella de rock)" },
-  { "time": 91, "line": "Pero no tenía dinero para una guitarra." },
-  { "time": 93, "line": "(¿Qué podía hacer? Debió ser un político)" },
-  { "time": 95, "line": "Pero nunca tuvo una buena educación." },
-  { "time": 97, "line": "(¿Qué podía hacer? Debió haber sido padre)" },
-  { "time": 101, "line": "Pero ni siquiera llegó a los veinte años." },
-  { "time": 104, "line": "Qué desperdicio," },
-  { "time": 105, "line": "jóvenes soñadores del ejército." },
-  { "time": 108, "line": "Ooh, qué desperdicio de" },
-  { "time": 110, "line": "jóvenes soñadores." },
-  { "time": 111, "line": "(Soñadores)" },
-  { "time": 113, "line": "Ooh, qué desperdicio de" },
-  { "time": 114, "line": "todos esos jóvenes soñadores." },
-  { "time": 115, "line": "(Soñadores)" },
-  { "time": 115, "line": "Jóvenes soñadores (soñadores)," },
-  { "time": 119, "line": "jóvenes soñadores (soñadores)." },
-  { "time": 136, "line": "(El héroe de mami)" },
-  { "time": 142, "line": "(B-F-P-O)" },
-  { "time": 146, "line": "(El héroe de mami)" },
-  { "time": 152, "line": "(B-F-P-O)" },
-  { "time": 174, "line": "(No (son) héroes 'rudos')" },
-  { "time": 177, "line": "(El héroe de mami)" }
-                // ... Sigue añadiendo líneas ...
+                  { "time": 10, "line": "(El héroe de mami)" },
+                  // ... Puedes añadir más líneas aquí ...
             ]
         }
     ];
-    // =================================================================
-    // === FIN DE LA SECCIÓN EDITABLE ===
-    // =================================================================
 
     let currentSongIndex = 0;
     let currentLyricIndex = -1;
 
-    // Elementos del DOM
     const playPauseBtn = document.getElementById('play-pause-btn');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -223,24 +120,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const playIcon = '<i class="fas fa-play"></i>';
     const pauseIcon = '<i class="fas fa-pause"></i>';
 
-    // Cargar una canción
     function loadSong(songIndex) {
         const song = songs[songIndex];
         audio.src = song.src;
         songTitleEl.textContent = song.title;
         songArtistEl.textContent = song.artist;
         loadLyrics(song.lyrics);
-        
-        // Resetea el estado de reproducción
         audio.pause();
         playPauseBtn.innerHTML = playIcon;
         spotifyIcon.classList.remove('is-spinning');
     }
 
-    // Cargar las letras de una canción
     function loadLyrics(lyrics) {
-        lyricsContainer.innerHTML = ''; // Limpia letras anteriores
-        currentLyricIndex = -1; // Resetea el índice
+        lyricsContainer.innerHTML = ''; 
+        currentLyricIndex = -1; 
 
         if (!lyrics || lyrics.length === 0) {
             lyricsContainer.innerHTML = '<p class="lyric-line active">♪ No hay letra para esta canción ♪</p>';
@@ -251,19 +144,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const p = document.createElement('p');
             p.textContent = line.line;
             p.classList.add('lyric-line');
-            p.dataset.index = index; // Guardamos el índice para encontrarlo luego
+            p.dataset.index = index; 
             lyricsContainer.appendChild(p);
         });
         
-        // Resetea el scroll
         lyricsContainer.style.transform = `translateY(0px)`;
     }
 
-    // Botón de Play/Pausa
     playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
-            // Esta es la parte importante. El primer play() debe ser
-            // directo de un clic del usuario.
             audio.play().catch(e => console.error("Error al intentar reproducir:", e));
             playPauseBtn.innerHTML = pauseIcon;
             spotifyIcon.classList.add('is-spinning');
@@ -274,43 +163,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Botón de Anterior
     prevBtn.addEventListener('click', () => {
         currentSongIndex--;
         if (currentSongIndex < 0) {
-            currentSongIndex = songs.length - 1; // Vuelve al final
+            currentSongIndex = songs.length - 1; 
         }
         loadSong(currentSongIndex);
-        audio.play().catch(e => console.error("Error al intentar reproducir:", e)); // Reproduce automáticamente la nueva canción
+        audio.play().catch(e => console.error("Error al intentar reproducir:", e)); 
         playPauseBtn.innerHTML = pauseIcon;
         spotifyIcon.classList.add('is-spinning');
     });
 
-    // Botón de Siguiente
     nextBtn.addEventListener('click', () => {
         currentSongIndex++;
         if (currentSongIndex >= songs.length) {
-            currentSongIndex = 0; // Vuelve al inicio
+            currentSongIndex = 0; 
         }
         loadSong(currentSongIndex);
-        audio.play().catch(e => console.error("Error al intentar reproducir:", e)); // Reproduce automáticamente la nueva canción
+        audio.play().catch(e => console.error("Error al intentar reproducir:", e)); 
         playPauseBtn.innerHTML = pauseIcon;
         spotifyIcon.classList.add('is-spinning');
     });
 
-    // Cuando la canción termina, pasa a la siguiente
     audio.addEventListener('ended', () => {
-        nextBtn.click(); // Simula un click en "siguiente"
+        nextBtn.click(); 
     });
 
-    // El corazón de las letras: se ejecuta cada vez que el tiempo de la canción avanza
     audio.addEventListener('timeupdate', () => {
         const currentTime = audio.currentTime;
         const lyrics = songs[currentSongIndex].lyrics;
 
-        if (!lyrics || lyrics.length === 0) return; // No hacer nada si no hay letras
+        if (!lyrics || lyrics.length === 0) return; 
 
-        // Encontrar el índice de la letra actual
         let newActiveIndex = -1;
         for (let i = lyrics.length - 1; i >= 0; i--) {
             if (currentTime >= lyrics[i].time) {
@@ -319,45 +203,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Si la línea activa no ha cambiado, no hacer nada (para optimizar)
         if (newActiveIndex === currentLyricIndex) {
             return;
         }
 
         currentLyricIndex = newActiveIndex;
 
-        // Quitar 'active' de todas las líneas
         lyricsContainer.querySelectorAll('.lyric-line').forEach(lineEl => {
             lineEl.classList.remove('active');
         });
 
         if (currentLyricIndex !== -1) {
-            // Añadir 'active' a la línea actual
             const activeLine = lyricsContainer.querySelector(`.lyric-line[data-index="${currentLyricIndex}"]`);
             if (activeLine) {
                 activeLine.classList.add('active');
-
-                // === Lógica de "scroll" ===
-                // Altura de la caja de letras (100px) / 2 = 50px (para centrar)
-                // Posición de la línea activa - 50px + la mitad de su propia altura
                 const scrollOffset = activeLine.offsetTop - (100 / 2) + (activeLine.clientHeight / 2);
-                
-                // Usamos transform: translateY para un scroll suave (definido en el CSS)
                 lyricsContainer.style.transform = `translateY(-${scrollOffset}px)`;
             }
         } else {
-            // Si no hay línea activa (antes de la primera), resetea el scroll
             lyricsContainer.style.transform = `translateY(0px)`;
         }
     });
 
-    // Cargar la primera canción al iniciar
     loadSong(currentSongIndex);
-    
-    // --- FIN DE LA LÓGICA DEL REPRODUCTOR ---
 
-
-    // --- EASTER EGG Y BOTÓN DE COPIAR ---
     const fnafSticker=document.getElementById('fnaf-sticker');const honkSound=new Audio('https://www.myinstants.com/media/sounds/fnaf-nose-honk.mp3');fnafSticker.addEventListener('click',()=>{honkSound.currentTime=0;honkSound.play().catch(e => {})});
     const copyBtn = document.getElementById('copy-link-btn');
     const originalBtnText = copyBtn.innerHTML;
@@ -375,8 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // <-- CAMBIO 2: AÑADE ESTA LÍNEA AL FINAL -->
-    // Esto oculta el preloader ahora que todo el script está listo.
+    // OCULTAR PRELOADER AL FINAL
     preloader.classList.add('loaded');
 
-}); // <-- Este es el final del 'DOMContentLoaded'
+});
