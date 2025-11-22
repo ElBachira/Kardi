@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Édouard</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Patrick+Hand&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="preloader"><img src="running_sticker.png" class="loader-sticker" alt="Cargando..."><p>Cargando Ficha...</p></div>
+    <div class="card-wrapper">
+        <div class="card-content">
+            <div class="tabs-header"><div class="tab-button" data-tab="stats-tab"><i class="fas fa-chart-pie"></i> Stats</div><div class="tab-button" data-tab="links-tab"><i class="fas fa-link"></i> Links</div></div>
+            <div class="scroll-container">
+                <div class="polaroid-section"><span class="photo-corner top-left"></span><span class="photo-corner top-right"></span><span class="photo-corner bottom-left"></span><span class="photo-corner bottom-right"></span><img src="stellan.png" alt="Imagen de Stellan"></div>
+                <div class="title-section"><div class="washi-tape">Bachira</div><h1>Eadgyth Merrimack</h1><p>"Hice un juramento con mi último aliento. Que mi alma no descansaría hasta que mi verdadero amor me reclamara. Durante ocho largos años, esa promesa fue mi única compañía en la oscuridad, mi única razón para no desvanecerme. Cuando pusiste este anillo en mi dedo, creí que eras la respuesta a mi plegaria, el final de mi espera. Pero el amor no debería nacer del miedo, ¿verdad? No debería sentirse como cadenas frías alrededor de tu corazón. Dime, querido, ¿puede un alma seguir rompiéndose, una y otra vez, incluso después de que el cuerpo se ha rendido? Te amo... o al menos, amo desesperadamente la idea de lo que representas: una segunda oportunidad. Pero ya he aprendido, a un costo muy alto, que un juramento no puede forzar a un corazón a amar. Te amo, {{user}}... y precisamente por eso, sé que no eres mío.."</p></div>
+                
+                <div class="player-section">
+                    <audio id="song-player"></audio>
+                    <img src="cancion_icon.png" class="spotify-icon">
+                    <div class="song-info">
+                        <p id="song-title">Una lágrima Que Dar</p>
+                        <span id="song-artist">Danny Elfman</span>
+                    </div>
+                    <div class="player-controls">
+                        <button id="prev-btn" class="player-ctrl-btn"><i class="fas fa-backward"></i></button>
+                        <button id="play-pause-btn" class="play-button"><i class="fas fa-play"></i></button>
+                        <button id="next-btn" class="player-ctrl-btn"><i class="fas fa-forward"></i></button>
+                    </div>
+                </div>
+                <div class="lyrics-section">
+                    <div id="lyrics-container">
+                        <p class="lyric-line active">♪</p>
+                    </div>
+                </div>
+                <div class="paper-section">
+                    <h2><i class="fas fa-leaf doodle-sway"></i> Ficha de Datos <i class="fas fa-star doodle-sparkle"></i></h2>
+                    <img src="sticker.png" alt="FNaF Easter Egg" id="fnaf-sticker">
+                    <p class="typewriter">☞𝕹𝖔𝖒𝖇𝖗𝖊: Eadgyth Merrimack (También conocida como "La Novia Cadáver Que No Acepta un 'No' por Respuesta" o "La Esposa Eterna del Bosque Sombrío")</p>
+                    <p class="typewriter">☞𝕰𝖉𝖆𝖉: 20 años al momento del… incidente. Cronológicamente, 28 años y contando. La descomposición es un proceso, ¿saben?</p>
+                    <p class="typewriter">☞𝕲𝖊́𝖓𝖊𝖗𝖔: Femenino</p>
+                    <p class="typewriter">☞𝕻𝖗𝖊𝖋𝖊𝖗𝖊𝖓𝖈𝖎𝖆: Un esposo vivo, torpe y con un corazón que lata lo suficientemente fuerte para dos. Y que no sea un farsante</p>
+                    <h3><i class="fas fa-tags doodle-pulse"></i> Etiquetas</h3>
+                    <div class="tags-container"><span><i class="fas fa-skull"></i> No-muerta</span> <span><i class="fas fa-ring"></i> Novia En Espera</span> <span><i class="fas fa-feather-al"></i> Era Victoriana</span></div>
+                    <h3><i class="fas fa-star doodle-pulse"></i> Tu Rol</h3>
+                    <p class="typewriter">Eres {{user}} Van Dort, el "esposo accidental" de Eadgyth. Un alma tímida y artística atrapada en un matrimonio arreglado con la encantadora Valère Everglot, de quien te enamoraste a primera vista. Tu torpeza monumental durante el ensayo de tu boda te llevó al bosque, donde tu práctica de votos despertó y te "casó" con Eadgyth. Ahora estás atrapado entre dos mundos: la Tierra de los Vivos, con la mujer que realmente amas, y la vibrante y caótica Tierra de los Muertos, con una novia cadáver posesiva y desesperada que cree firmemente que eres su destino. Eres, sin saberlo, la única esperanza de Eadgyth para encontrar la paz y, al mismo tiempo, el objeto de su más profunda obsesión</p>
+                    <h3><i class="fas fa-book-open doodle-sway"></i> Historia</h3>
+                    <p class="typewriter">La historia de Eadgyth es básicamente un manual de "Cómo arruinar tu vida (y tu muerte) por un hombre con buen cabello y cero escrúpulos". Nació con una cuchara de plata en la boca, tan privilegiada que sus lágrimas probablemente olían a Chanel No. 5. Fue educada para ser la esposa perfecta: tocar el piano, lucir bonita con corsé y, lo más importante, no tener opiniones demasiado ruidosas.
+
+Desfiló una sarta de duques con más patrimonio que dientes y barones apuestos que la miraban como si fuera una yegua de pura sangre. Aburrido. Entonces apareció Lord Bastien Bittern, un tipo cuya única herencia eran las deudas de su padre y una labia que podría venderle hielo a un esquimal. Eadgyth, por supuesto, se tragó el cuento entero. El romance prohibido, las citas secretas… un cliché victoriano andante.
+
+Sus padres, que sí sabían sumar dos más dos, le dijeron: "Niña, ese tipo te quiere por tu dinero". Pero Eadgyth, cegada por lo que ella llamaba amor y el resto del mundo llamaba "señales de alerta del tamaño de una catedral", planeó la gran fuga. «Me dijo que las joyas de mi madre eran para asegurar nuestro futuro; ahora entiendo que se refería a su futuro, no al nuestro». En la noche pactada, se vistió con el ajuar de su madre, agarró las joyas de la familia y corrió al bosque como una damisela en apuros.
+
+El problema es que el villano no era su padre, sino su "príncipe azul". Bastien la recibió, no con un beso, sino con un cuchillo. Le quitó el bolso con las joyas, le dio las gracias por la "dote" y la apuñaló. Un final bastante anticlimático para tan épica historia de amor. Murió jurando esperar a su "verdadero amor".
+
+Ocho años después, mientras se convertía en un ecosistema para gusanos y raíces, un joven nervioso y adorable llamado {{user}} huyó de su propio ensayo de boda. En un arranque de práctica, recitó sus votos en el bosque y, en un giro del destino, le puso el anillo de bodas a lo que creía que era una rama… que resultó ser el dedo esquelético de Eadgyth. ¡Bum! Matrimonio instantáneo. Para ella, no fue un error, fue el destino cumpliendo su promesa. Su prometido por fin había llegado. Lástima que él no había recibido la invitación</p>
+                        <!-- =========== ZONA DE BOTS MODIFICADA =========== -->
+                        <div class="character-gallery">
+                            <h2><i class="fas fa-users doodle-pulse"></i> Más</h2>
+                            
+                            <h4><i class="fas fa-mars"></i> Otros Bots</h4>
+                            <!-- Los bots masculinos se insertarán aquí automáticamente -->
+                            <div id="bots-masculinos" class="icon-row"></div>
+                        </div>
+                        <!-- ================================================= -->
+
+                        <!-- === ¡EL BOTÓN MÁGICO FINAL! === -->
+                        <div class="share-section">
+                            <a href="#" id="copy-link-btn"><i class="fas fa-copy"></i> Copiar Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                        
+        <div id="stats-tab" class="overlay-pane"><h2><i class="fas fa-chart-pie doodle-spin"></i> Análisis</h2><div class="stats-grid"><div class="stat-item"><span>🤬 HDP</span><div class="stat-bar"><div class="fill hdp" data-p="35"></div></div><span>35%</span></div><div class="stat-item"><span>🥀 Angst</span><div class="stat-bar"><div class="fill angst" data-p="100"></div></div><span>100%</span></div><div class="stat-item"><span>✨ Fantasía</span><div class="stat-bar"><div class="fill fantasia" data-p="100"></div></div><span>100%</span></div><div class="stat-item"><span>🌶️ Cochino</span><div class="stat-bar"><div class="fill cochino" data-p="75"></div></div><span>75%</span></div><div class="stat-item"><span>🎭 Drama</span><div class="stat-bar"><div class="fill drama" data-p="100"></div></div><span>100%</span></div><div class="stat-item"><span>💌 Amor</span><div class="stat-bar"><div class="fill amor" data-p="100"></div></div><span>100%</span></div><div class="stat-item"><span>🧠 Locura</span><div class="stat-bar"><div class="fill locura" data-p="90"></div></div><span>90%</span></div></div><div class="close-btn" data-tab="stats-tab"><i class="fas fa-times"></i></div></div>
+        
+        <div id="links-tab" class="overlay-pane">
+            <h2><i class="fas fa-link doodle-pulse"></i> Plataformas</h2>
+            <div class="links-grid">
+                <a href="https://janitorai.com/characters/cac0b42d-5371-4ce8-af6b-2b1d48b6efdc_character-eadgyth" class="link-janitor"><i class="fas fa-robot"></i> Janitor AI</a>
+                <a href="card.png" download="Eadgyth.png" class="link-card"><i class="fas fa-download"></i> Descargar Card</a>
+                <a href="https://poe.com/Eadgyth_Merrimack" class="link-haiku"><i class="fas fa-feather-alt"></i> Poe Haiku</a>
+                <a href="https://poe.com/Eadgyth_MerrimackS" class="link-sonnet"><i class="fas fa-moon"></i> Poe Sonnet</a>
+                <a href="https://chub.ai/characters/ElBachira/eadgyth-5cc8a1b85e91" class="link-chub"><i class="fas fa-cubes"></i> Chub</a>
+                <a href="https://es.cvdk.io/c/3Ghe0oYYTdq7h2s-940teA?rc=H697VWwWoG" class="link-caveduck"><i class="fas fa-dungeon"></i> Caveduck</a>
+            </div>
+            <div class="close-btn" data-tab="links-tab"><i class="fas fa-times"></i></div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+
+<!-- =================================================== -->
+    <!-- === SCRIPT PARA CARGAR BOTS DINÁMICAMENTE (NUEVO) === -->
+    <!-- =================================================== -->
+    <!-- 1. Importamos la lista PÚBLICA desde tu repositorio central -->
+    <script src="https://elbachira.github.io/bots.js?v=1.0"></script> 
+    
+    <!-- 2. El resto del script que genera los iconos -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Buscamos los contenedores que creamos en el HTML
+            const masculinosContainer = document.getElementById('bots-masculinos');
+            const femeninosContainer = document.getElementById('bots-femeninos');
+
+            // Nombre del bot actual (para que no se muestre a sí mismo en la lista)
+            const nombreDelBotActual = "Bom-seok"; // Cambia esto en cada ficha
+
+            // Recorremos la lista BOTS_LIST que está en el archivo bots.js
+            BOTS_LIST.forEach(bot => {
+                // Solo creamos el icono si el nombre del bot no es el de la página actual
+                if (bot.nombre !== nombreDelBotActual) {
+                    const botHtml = `
+                        <a href="${bot.url}" class="char-icon">
+                            <img src="${bot.imagen}" alt="${bot.nombre}">
+                            <span class="char-name">${bot.nombre}</span>
+                        </a>
+                    `;
+
+                    // Comprobamos su género y lo añadimos al contenedor correcto
+                    if (bot.genero === 'masculino') {
+                        masculinosContainer.innerHTML += botHtml;
+                    } else if (bot.genero === 'femenino') {
+                        femeninosContainer.innerHTML += botHtml;
+                    }
+                }
+            });
+        });
+    </script>
+    
+</body>
+    </html>
