@@ -77,18 +77,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const bars = document.querySelectorAll('.overlay-pane.active .fill');
         
         bars.forEach(bar => {
-            // 2. Primero la ponemos a 0 para reiniciar la animación
+            // 2. TRUCO PRO: Quitamos la transición momentáneamente para que el reset a 0 sea instantáneo
+            bar.style.transition = 'none';
             bar.style.width = '0%';
             
-            // 3. Obtenemos el porcentaje del HTML (asegúrate que tu HTML tenga data-p="70" por ejemplo)
-            const percentage = bar.getAttribute('data-p');
+            // 3. Forzamos al navegador a "pintar" el 0% (Reflow)
+            void bar.offsetWidth; 
             
-            // 4. Pequeño retraso para permitir que el navegador procese el width: 0%
-            setTimeout(() => {
-                if(percentage) {
+            // 4. Restauramos la transición (asegúrate que en tu CSS .fill tenga transition: width 1s...)
+            bar.style.transition = 'width 1s ease-in-out';
+
+            // 5. Obtenemos el porcentaje y LIMPIAMOS el dato por si pusiste un % en el HTML por error
+            let rawVal = bar.getAttribute('data-p');
+            
+            if(rawVal) {
+                // Esto quita el símbolo '%' y espacios si se te escaparon en el HTML
+                const percentage = rawVal.replace('%', '').trim();
+                
+                // 6. Aplicamos el ancho limpio
+                setTimeout(() => {
                     bar.style.width = percentage + '%';
-                }
-            }, 100);
+                }, 50);
+            }
         });
     }
     
