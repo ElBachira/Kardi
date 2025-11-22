@@ -72,7 +72,25 @@ document.addEventListener('DOMContentLoaded', function() {
             button.closest('.overlay-pane').classList.remove('active');
         });
     });
-    function animateStats(){document.querySelectorAll('.overlay-pane.active .fill').forEach(bar=>{bar.style.width='0%';const percentage=bar.getAttribute('data-p');setTimeout(()=>{bar.style.width=percentage+'%'},100)})}
+    function animateStats() {
+        // 1. Buscamos las barras DENTRO del panel activo
+        const bars = document.querySelectorAll('.overlay-pane.active .fill');
+        
+        bars.forEach(bar => {
+            // 2. Primero la ponemos a 0 para reiniciar la animación
+            bar.style.width = '0%';
+            
+            // 3. Obtenemos el porcentaje del HTML (asegúrate que tu HTML tenga data-p="70" por ejemplo)
+            const percentage = bar.getAttribute('data-p');
+            
+            // 4. Pequeño retraso para permitir que el navegador procese el width: 0%
+            setTimeout(() => {
+                if(percentage) {
+                    bar.style.width = percentage + '%';
+                }
+            }, 100);
+        });
+    }
     
 
     // --- LÓGICA DEL REPRODUCTOR DE MÚSICA Y LETRAS (COMPLETAMENTE NUEVO) ---
